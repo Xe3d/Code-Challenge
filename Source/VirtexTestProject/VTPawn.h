@@ -38,13 +38,21 @@ protected:
 private:
 
 	UFUNCTION(Server, Reliable, WithValidation)
-	void MoveOnServer(EDirection NewDir);
+	void MoveOnServer(FVector NewDir);
+
+
+	void OnMoveReleased(EDirection Direction);
 
 	void OnMovePressed(EDirection Direction);
 
 	void OnActionPressed();	
 
-	EDirection CurrentDirection;
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ActionPressedServer();
+
+	const FVector GetMovementVectorFromEnum(EDirection Direction);
+
+	FVector CurrentDirection;
 
 	bool MoveCharacter;
 };
